@@ -1,42 +1,31 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
 import { cursorTo } from 'readline';
-import got from 'got';
+import axios from 'axios';
+import { URLSearchParams } from 'url';
 
-const ACCESS_TOKEN = "Nv1FdHjRGh2hOeJW7QmckwbvlBSuc1liNelt2Y7_XLk.f6w9a6A1-9jaR-dMH_LToKg42Pf23ko_JaEOEh3Pikc";
-const ENDPOINTT_TO_GET = "https://api.nature.global/1/devices";
-
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+const ENDPOINTT_TO_POST = process.env.ENDPOINTT_TO_POST;
 
 export const hello: APIGatewayProxyHandler = async (event, _context) => {
 
-  //(async () => {
   try {
-    //const result = await got.get(ENDPOINTT_TO_GET, {
-    const result = await got.get(ENDPOINTT_TO_GET, {
-      //body: jsonDataImported,
-      //json: true,
-      headers: {
-        'Content-Type': "application/json;charset=utf-8",
-        Authorization: `Bearer ${ACCESS_TOKEN}`
-      }
-    });
+    const paramSet = new URLSearchParams();
+    paramSet.append('button', 'ch-6');
 
-    console.log(result.body);
+    // Authorizationヘッダーを設定
+    axios.defaults.headers.common['Authorization'] = `Bearer ${ACCESS_TOKEN}` 
+    await axios.post(ENDPOINTT_TO_POST, paramSet);
 
     return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: result.body,
-      }, null, 2),
+      statusCode: 200
     };
 
   } catch(e) {
-    console.log("error!!!!");
-
+    console.log(e);
     return {
       statusCode: 500,
-      body: "error"
+      body: e.error
     };
   }
-  //})();
 }

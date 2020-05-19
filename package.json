@@ -1,5 +1,5 @@
 {
-  "name": "hellolambda",
+  "name": "sam-typescript",
   "version": "1.0.0",
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {

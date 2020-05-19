@@ -16,7 +16,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: cdktest
+  profile: default
   region: ap-northeast-1
   apiGateway:
     minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
@@ -30,3 +30,7 @@ functions:
       - http:
           method: get
           path: hello
+    environment:
+      ACCESS_TOKEN: 
+      ENDPOINTT_TO_POST: 
+
