@@ -22,7 +22,6 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
     };
 
   } catch(e) {
-    console.log(e);
     return {
       statusCode: 500,
       body: e.error
